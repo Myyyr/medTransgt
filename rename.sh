@@ -1,4 +1,4 @@
-for file in "$1/*"
+for file in $1/*
 do
     #copy stuff ....
     new=${file/_0000/}
