@@ -3,6 +3,8 @@ do
     if [[ -f $file ]]; then
         #copy stuff ....
         new=${file/_0000/}
-        mv "$1/$file" "$1/$new"
+        echo "$1/$file"
+        echo "$1/$new"
+        # mv "$1/$file" "$1/$new"
     fi
 done
