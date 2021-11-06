@@ -1,5 +1,7 @@
 for file in "$1/*"
 do
+	echo $file
+	echo
     if [[ -f $file ]]; then
         #copy stuff ....
         new=${file/_0000/}
