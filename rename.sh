@@ -2,7 +2,7 @@ for file in $1/*
 do
     #copy stuff ....
     new=${file/_0000/}
-    echo $1
+    echo $file
     echo -e '\n'
     echo $new
     echo -e '------\n\n'
