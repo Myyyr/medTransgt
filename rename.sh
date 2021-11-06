@@ -1,4 +1,4 @@
-for file in $1*
+for file in "$1/*"
 do
 	echo $file
     if [[ -f $file ]]; then
