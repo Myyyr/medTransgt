@@ -1,0 +1,1 @@
+export nnFormer_raw_data_base="/local/DEEPLEARNING/nnformer/DATASET/nnFormer_raw";export nnFormer_preprocessed="/local/DEEPLEARNING/nnformer/DATASET/nnFormer_preprocessed";export RESULTS_FOLDER="/local/DEEPLEARNING/nnformer/DATASET/nnFormer_trained_models"
