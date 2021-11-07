@@ -38,6 +38,7 @@ from datetime import datetime
 from tqdm import trange
 from nnformer.utilities.to_torch import maybe_to_torch, to_cuda
 
+from torch.utils.tensorboard import SummaryWriter
 
 class NetworkTrainer(object):
     def __init__(self, deterministic=True, fp16=False):
@@ -114,7 +115,7 @@ class NetworkTrainer(object):
         self.log_file = None
         self.deterministic = deterministic
 
-        self.use_progress_bar = False
+        self.use_progress_bar = True
         if 'nnformer_use_progress_bar' in os.environ.keys():
             self.use_progress_bar = bool(int(os.environ['nnformer_use_progress_bar']))
 
@@ -437,6 +438,8 @@ class NetworkTrainer(object):
         pass
 
     def run_training(self):
+        self.writer = SummaryWriter(comment=str(self.output_folder)+"_f"+str(self.fold))
+        
         if not torch.cuda.is_available():
             self.print_to_log_file("WARNING!!! You are attempting to run training on a CPU (torch.cuda.is_available() is False). This can be VERY slow!")
 
@@ -483,6 +486,7 @@ class NetworkTrainer(object):
 
             self.all_tr_losses.append(np.mean(train_losses_epoch))
             self.print_to_log_file("train loss : %.4f" % self.all_tr_losses[-1])
+            self.writer.add_scalar("train loss", self.all_tr_losses[-1], self.epoch)
 
             with torch.no_grad():
                 # validation with train=False
