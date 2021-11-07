@@ -165,7 +165,7 @@ class nnFormerGT1TrainerV2_Synapse(nnFormerTrainer_synapse):
                                     net_nonlin, net_nonlin_kwargs, True, False, lambda x: x, InitWeights_He(1e-2),
                                     self.net_num_pool_op_kernel_sizes, self.net_conv_kernel_sizes, False, True, True,gt_num=1)
         checkpoint = torch.load("../Pretrained_weight/pretrain_Synapse.model", map_location='cuda')
-        self.network.load_state_dict(checkpoint['state_dict'])
+        self.network.load_state_dict(checkpoint['state_dict'], strict=False)
         print('I am using the pre_train weight!!')                                      
                            
         if torch.cuda.is_available():
