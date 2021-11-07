@@ -473,8 +473,6 @@ class BasicLayer(nn.Module):
         self.window_size = window_size
         self.shift_size = window_size // 2
 
-        self.global_token = torch.nn.Parameter(torch.randn(gt_num,dim))
-        self.global_token.requires_grad = True
 
 
         self.depth = depth
@@ -496,15 +494,19 @@ class BasicLayer(nn.Module):
                 drop_path=drop_path[i] if isinstance(drop_path, list) else drop_path, norm_layer=norm_layer, gt_num=gt_num,id_layer=id_layer)
             for i in range(depth)])
 
-        ws_pe = (8*gt_num//2**id_layer, 8*gt_num//2**id_layer, 8*gt_num//2**id_layer)
-        self.pe = nn.Parameter(torch.zeros(ws_pe[0]*ws_pe[1]*ws_pe[2], dim))
-        trunc_normal_(self.pe, std=.02)
 
         # patch merging layer
         if downsample is not None:
             self.downsample = downsample(dim=dim, norm_layer=norm_layer)
         else:
             self.downsample = None
+
+
+        self.global_token = torch.nn.Parameter(torch.randn(gt_num,dim))
+        self.global_token.requires_grad = True
+        ws_pe = (8*gt_num//2**id_layer, 8*gt_num//2**id_layer, 8*gt_num//2**id_layer)
+        self.pe = nn.Parameter(torch.zeros(ws_pe[0]*ws_pe[1]*ws_pe[2], dim))
+        trunc_normal_(self.pe, std=.02)
 
     def forward(self, x, S, H, W):
         """ Forward function.
@@ -594,8 +596,6 @@ class BasicLayer_up(nn.Module):
         self.shift_size = window_size // 2
         self.depth = depth
 
-        self.global_token = torch.nn.Parameter(torch.randn(gt_num,dim))
-        self.global_token.requires_grad = True
         
 
         # build blocks
@@ -614,13 +614,18 @@ class BasicLayer_up(nn.Module):
                 drop_path=drop_path[i] if isinstance(drop_path, list) else drop_path, norm_layer=norm_layer, gt_num=gt_num, id_layer=id_layer)
             for i in range(depth)])
 
-        ws_pe = (8*gt_num//2**id_layer, 8*gt_num//2**id_layer, 8*gt_num//2**id_layer)
-        self.pe = nn.Parameter(torch.zeros(ws_pe[0]*ws_pe[1]*ws_pe[2], dim))
-        trunc_normal_(self.pe, std=.02)
 
         # patch merging layer
         
         self.Upsample = upsample(dim=2*dim, norm_layer=norm_layer)
+
+        self.global_token = torch.nn.Parameter(torch.randn(gt_num,dim))
+        self.global_token.requires_grad = True
+        ws_pe = (8*gt_num//2**id_layer, 8*gt_num//2**id_layer, 8*gt_num//2**id_layer)
+        self.pe = nn.Parameter(torch.zeros(ws_pe[0]*ws_pe[1]*ws_pe[2], dim))
+        trunc_normal_(self.pe, std=.02)
+
+        
     def forward(self, x,skip, S, H, W):
         """ Forward function.
 
