@@ -351,12 +351,6 @@ class nnFormerTrainerV2_Synapse(nnFormerTrainer_synapse):
 
         tr_keys.sort()
         val_keys.sort()
-        print("\n-------------")
-        print(self.dataset.keys())
-        print("\n-------------")
-        print(tr_keys)
-        print("\n-------------")
-        print(val_keys)
         self.dataset_tr = OrderedDict()
         for i in tr_keys:
             j = i.replace('img','bcv_').replace('000','').replace('00','')
@@ -365,7 +359,7 @@ class nnFormerTrainerV2_Synapse(nnFormerTrainer_synapse):
         for i in val_keys:
             j = i.replace('img','bcv_').replace('000','').replace('00','')
             self.dataset_val[i] = self.dataset[j]
-        exit(0)
+        # exit(0)
 
     def setup_DA_params(self):
         """
