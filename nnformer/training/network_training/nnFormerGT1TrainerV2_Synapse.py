@@ -28,7 +28,7 @@ from nnformer.network_architecture.neural_network import SegmentationNetwork
 from nnformer.training.data_augmentation.default_data_augmentation import default_2D_augmentation_params, \
     get_patch_size, default_3D_augmentation_params
 from nnformer.training.dataloading.dataset_loading import unpack_dataset
-from nnformer.training.network_training.nnFormerTrainer_synapse import nnFormerGTTrainer_synapse
+from nnformer.training.network_training.nnFormerGTTrainer_synapse import nnFormerGTTrainer_synapse
 from nnformer.utilities.nd_softmax import softmax_helper
 from sklearn.model_selection import KFold
 from torch import nn
