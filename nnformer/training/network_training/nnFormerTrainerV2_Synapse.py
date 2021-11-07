@@ -351,18 +351,18 @@ class nnFormerTrainerV2_Synapse(nnFormerTrainer_synapse):
         tr_keys.sort()
         val_keys.sort()
         print("\n-------------")
-        # print(keys)
+        print(self.dataset.keys())
         print("\n-------------")
         print(tr_keys)
         print("\n-------------")
         print(val_keys)
-        exit(0)
         self.dataset_tr = OrderedDict()
         for i in tr_keys:
             self.dataset_tr[i] = self.dataset[i]
         self.dataset_val = OrderedDict()
         for i in val_keys:
             self.dataset_val[i] = self.dataset[i]
+        exit(0)
 
     def setup_DA_params(self):
         """
