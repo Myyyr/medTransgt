@@ -342,8 +342,15 @@ class nnFormerTrainerV2_Synapse(nnFormerTrainer_synapse):
                 self.print_to_log_file("This random 80:20 split has %d training and %d validation cases."
                                        % (len(tr_keys), len(val_keys)))
 
+
         tr_keys.sort()
         val_keys.sort()
+        print("\n-------------")
+        print(keys)
+        print("\n-------------")
+        print(tr_keys)
+        print("\n-------------")
+        print(val_keys)
         self.dataset_tr = OrderedDict()
         for i in tr_keys:
             self.dataset_tr[i] = self.dataset[i]
