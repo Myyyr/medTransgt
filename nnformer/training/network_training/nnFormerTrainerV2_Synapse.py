@@ -297,10 +297,12 @@ class nnFormerTrainerV2_Synapse(nnFormerTrainer_synapse):
             # if fold==all then we use all images for training and validation
             tr_keys = val_keys = list(self.dataset.keys())
         else:
+            print("~~~~~ HERE")
             splits_file = join(self.dataset_directory, "splits_final.pkl")
 
             # if the split file does not exist we need to create it
             if not isfile(splits_file):
+                print("~~~~~ ok 1")
                 self.print_to_log_file("Creating new 5-fold cross-validation split...")
                 splits = []
                 all_keys_sorted = np.sort(list(self.dataset.keys()))
@@ -314,6 +316,7 @@ class nnFormerTrainerV2_Synapse(nnFormerTrainer_synapse):
                 save_pickle(splits, splits_file)
 
             else:
+                print("~~~~~ ok 2")
                 self.print_to_log_file("Using splits from existing split file:", splits_file)
                 splits = load_pickle(splits_file)
                 self.print_to_log_file("The split file contains %d splits." % len(splits))
@@ -324,11 +327,13 @@ class nnFormerTrainerV2_Synapse(nnFormerTrainer_synapse):
             splits[self.fold]['val']=np.array(['img0001', 'img0002', 'img0003', 'img0004', 'img0008', 'img0022','img0025', 'img0029', 'img0032', 'img0035', 'img0036', 'img0038'])
             self.print_to_log_file("Desired fold for training: %d" % self.fold)
             if self.fold < len(splits):
+                print("~~~~~ good 1")
                 tr_keys = splits[self.fold]['train']
                 val_keys = splits[self.fold]['val']
                 self.print_to_log_file("This split has %d training and %d validation cases."
                                        % (len(tr_keys), len(val_keys)))
             else:
+                print("~~~~~ good 2")
                 self.print_to_log_file("INFO: You requested fold %d for training but splits "
                                        "contain only %d folds. I am now creating a "
                                        "random (but seeded) 80:20 split!" % (self.fold, len(splits)))
@@ -351,6 +356,7 @@ class nnFormerTrainerV2_Synapse(nnFormerTrainer_synapse):
         print(tr_keys)
         print("\n-------------")
         print(val_keys)
+        exit(0)
         self.dataset_tr = OrderedDict()
         for i in tr_keys:
             self.dataset_tr[i] = self.dataset[i]
