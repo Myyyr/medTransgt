@@ -351,7 +351,7 @@ class nnFormerTrainerV2_Synapse(nnFormerTrainer_synapse):
         tr_keys.sort()
         val_keys.sort()
         print("\n-------------")
-        print(keys)
+        # print(keys)
         print("\n-------------")
         print(tr_keys)
         print("\n-------------")
