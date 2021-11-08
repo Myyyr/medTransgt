@@ -931,7 +931,8 @@ class encoder(nn.Module):
                  drop_rate=0.,
                  attn_drop_rate=0.,
                  drop_path_rate=0.2,
-                 norm_layer=nn.LayerNorm
+                 norm_layer=nn.LayerNorm,
+                 gt_num=1
                  ):
         super().__init__()
         
