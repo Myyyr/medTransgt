@@ -216,7 +216,7 @@ class WindowAttention(nn.Module):
             mask: (0/-inf) mask with shape of (num_windows, Wh*Ww, Wh*Ww) or None
         """
         B_, N_, C = x.shape
-        if len(gt.shape) != 3:
+        if len(gt.shape) != 3 and self.gt_num!=0:
             gt = repeat(gt, "g c -> b g c", b=B_)# shape of (num_windows*B, G, C)
         x = torch.cat([gt, x], dim=1) # x of shape (num_windows*B, G+N_, C)
         B_, N, C = x.shape
@@ -349,9 +349,10 @@ class SwinTransformerBlock(nn.Module):
 
         tmp, ngt, c = gt.shape
         nw = tmp//B
-        gt =rearrange(gt, "(b n) g c -> b (n g) c", b=B)
-        gt = self.gt_attn(gt, pe)
-        gt = rearrange(gt, "b (n g) c -> (b n) g c",g=ngt, c=C)
+        if self.gt_num!=0:
+            gt =rearrange(gt, "(b n) g c -> b (n g) c", b=B)
+            gt = self.gt_attn(gt, pe)
+            gt = rearrange(gt, "b (n g) c -> (b n) g c",g=ngt, c=C)
 
         # merge windows
         attn_windows = attn_windows.view(-1, self.window_size, self.window_size, self.window_size, C)
