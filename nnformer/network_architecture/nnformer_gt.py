@@ -112,10 +112,10 @@ class ClassicAttention(nn.Module):
 
         m = pe.shape[0]
         strt = m//2-N//2
-        print("====> x", x.shape)
-        print("====> bpe", pe.shape)
+        # print("====> x", x.shape)
+        # print("====> bpe", pe.shape)
         pe = pe[strt:strt+N,:]
-        print("====> ape", pe.shape)
+        # print("====> ape", pe.shape)
         x = x + pe
 
         qkv = self.qkv(x).reshape(B_, N, 3, self.num_heads, C // self.num_heads).permute(2, 0, 3, 1, 4)
@@ -617,7 +617,7 @@ class BasicLayer_up(nn.Module):
         self.global_token = torch.nn.Parameter(torch.randn(gt_num,dim))
         self.global_token.requires_grad = True
         ws_pe = (8*gt_num//2**id_layer, 8*gt_num//2**id_layer, 8*gt_num//2**id_layer)
-        print(id_layer,"ws_pe",ws_pe)
+        # print(id_layer,"ws_pe",ws_pe)
         self.pe = nn.Parameter(torch.zeros(ws_pe[0]*ws_pe[1]*ws_pe[2], dim))
         trunc_normal_(self.pe, std=.02)
 
@@ -949,7 +949,7 @@ class encoder(nn.Module):
 
         # build layers
         self.layers = nn.ModuleList()
-        print("\n------ encoder")
+        # print("\n------ encoder")
         for i_layer in range(self.num_layers)[::-1]:
             
             layer = BasicLayer_up(
