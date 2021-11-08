@@ -614,6 +614,7 @@ class BasicLayer_up(nn.Module):
         self.global_token = torch.nn.Parameter(torch.randn(gt_num,dim))
         self.global_token.requires_grad = True
         ws_pe = (8*gt_num//2**id_layer, 8*gt_num//2**id_layer, 8*gt_num//2**id_layer)
+        print(id_layer,"ws_pe",ws_pe)
         self.pe = nn.Parameter(torch.zeros(ws_pe[0]*ws_pe[1]*ws_pe[2], dim))
         trunc_normal_(self.pe, std=.02)
 
@@ -945,6 +946,7 @@ class encoder(nn.Module):
 
         # build layers
         self.layers = nn.ModuleList()
+        print("\n------ encoder")
         for i_layer in range(self.num_layers)[::-1]:
             
             layer = BasicLayer_up(
@@ -966,6 +968,7 @@ class encoder(nn.Module):
                 upsample=Patch_Expanding, gt_num=gt_num,id_layer=i_layer
                 )
             self.layers.append(layer)
+        exit(0)
         self.num_features = [int(embed_dim * 2 ** i) for i in range(self.num_layers)]
     def forward(self,x,skips):
             
