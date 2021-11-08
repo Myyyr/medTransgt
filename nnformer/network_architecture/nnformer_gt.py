@@ -968,7 +968,7 @@ class encoder(nn.Module):
                 drop_path=dpr[sum(
                     depths[:i_layer]):sum(depths[:i_layer + 1])],
                 norm_layer=norm_layer,
-                upsample=Patch_Expanding, gt_num=gt_num,id_layer=i_layer
+                upsample=Patch_Expanding, gt_num=gt_num,id_layer=len(depths)-i_layer-1
                 )
             self.layers.append(layer)
         # exit(0)
