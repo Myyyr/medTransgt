@@ -112,7 +112,10 @@ class ClassicAttention(nn.Module):
 
         m = pe.shape[0]
         strt = m//2-N//2
+        print("====> x", x.shape)
+        print("====> bpe", pe.shape)
         pe = pe[strt:strt+N,:]
+        print("====> ape", pe.shape)
         x = x + pe
 
         qkv = self.qkv(x).reshape(B_, N, 3, self.num_heads, C // self.num_heads).permute(2, 0, 3, 1, 4)
@@ -968,7 +971,7 @@ class encoder(nn.Module):
                 upsample=Patch_Expanding, gt_num=gt_num,id_layer=i_layer
                 )
             self.layers.append(layer)
-        exit(0)
+        # exit(0)
         self.num_features = [int(embed_dim * 2 ** i) for i in range(self.num_layers)]
     def forward(self,x,skips):
             
