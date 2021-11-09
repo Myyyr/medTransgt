@@ -1,8 +1,12 @@
 #!/bin/bash
 
-export nnFormer_raw_data_base="/local/DEEPLEARNING/nnformer/DATASET/nnFormer_raw"
-export nnFormer_preprocessed="/local/DEEPLEARNING/nnformer/DATASET/nnFormer_preprocessed"
-export RESULTS_FOLDER="/local/DEEPLEARNING/nnformer/DATASET/nnFormer_trained_models"
+# export nnFormer_raw_data_base="/local/DEEPLEARNING/nnformer/DATASET/nnFormer_raw"
+# export nnFormer_preprocessed="/local/DEEPLEARNING/nnformer/DATASET/nnFormer_preprocessed"
+# export RESULTS_FOLDER="/local/DEEPLEARNING/nnformer/DATASET/nnFormer_trained_models"
+
+export nnFormer_raw_data_base="/etudiants/siscol/t/themyr_l/DATASET/nnFormer_raw"
+export nnFormer_preprocessed="/etudiants/siscol/t/themyr_l/DATASET/nnFormer_preprocessed"
+export RESULTS_FOLDER="/etudiants/siscol/t/themyr_l/DATASET/nnFormer_trained_models"
 
 cd
 source activate nnFormer
