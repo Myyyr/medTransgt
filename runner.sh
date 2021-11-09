@@ -15,7 +15,7 @@ cd ~/medtransgt
 
 # $TRAINER=nnFormerTrainerV2_Synapse
 # TRAINER="nnFormerGT0TrainerV2_Synapse"
-TRAINER="nnFormerGT1TrainerV2_Synapse"
+TRAINER="nnFormerGT1TrainerV2_SynapseV2"
 # TRAINER="nnFormerGT5TrainerV2_Synapse"
 
 nnFormer_train 3d_fullres $TRAINER 2 0
