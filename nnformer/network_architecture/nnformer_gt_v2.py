@@ -501,10 +501,9 @@ class BasicLayer(nn.Module):
             self.downsample = None
 
         self.global_token = torch.nn.Parameter(torch.randn(gt_num,dim))
-        self.global_token.requires_grad = False
+        self.global_token.requires_grad = True
         ws_pe = (8*gt_num//2**id_layer, 8*gt_num//2**id_layer, 8*gt_num//2**id_layer)
         self.pe = nn.Parameter(torch.zeros(ws_pe[0]*ws_pe[1]*ws_pe[2], dim))
-        self.pe.requires_grad = False
         trunc_normal_(self.pe, std=.02)
 
     def forward(self, x, S, H, W):

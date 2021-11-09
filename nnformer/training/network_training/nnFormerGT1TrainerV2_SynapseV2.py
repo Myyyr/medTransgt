@@ -174,10 +174,10 @@ class nnFormerGT1TrainerV2_SynapseV2(nnFormerTrainer_synapse):
 
     def initialize_optimizer_and_scheduler(self):
         assert self.network is not None, "self.initialize_network must be called first"
-        # self.optimizer = torch.optim.SGD(self.network.parameters(), self.initial_lr, weight_decay=self.weight_decay,
-        #                                  momentum=0.99, nesterov=True)
-        self.optimizer = torch.optim.Adam(self.network.parameters(), self.initial_lr, weight_decay=self.weight_decay,
-                                          amsgrad=True)
+        self.optimizer = torch.optim.SGD(self.network.parameters(), self.initial_lr, weight_decay=self.weight_decay,
+                                         momentum=0.99, nesterov=True)
+        # self.optimizer = torch.optim.Adam(self.network.parameters(), self.initial_lr, weight_decay=self.weight_decay,
+        #                                   amsgrad=True)
         self.lr_scheduler = None
 
     def run_online_evaluation(self, output, target):
