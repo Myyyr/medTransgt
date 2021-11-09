@@ -37,7 +37,7 @@ from nnformer.training.learning_rate.poly_lr import poly_lr
 from batchgenerators.utilities.file_and_folder_operations import *
 
 
-class nnFormerGT1TrainerV2_Synapse(nnFormerTrainer_synapse):
+class nnFormerGT1TrainerV2_SynapseV2(nnFormerTrainer_synapse):
     """
     Info for Fabian: same as internal nnFormerTrainerV2_2
     """
